@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Demo App</string>
+
+    <string name="label_javascript">Javascript to Native Code</string>
+
+    <string-array name="Features">
+        <item>Javascript</item>
+    </string-array>
 </resources>
