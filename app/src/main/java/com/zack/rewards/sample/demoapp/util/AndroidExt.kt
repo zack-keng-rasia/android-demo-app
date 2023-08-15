@@ -1,5 +1,6 @@
 package com.zack.rewards.sample.demoapp.util
 
+import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
@@ -16,4 +17,8 @@ fun Fragment.showToast(message: String) {
 
 fun Fragment.showLongToast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+}
+
+fun Context.toastMessage(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
