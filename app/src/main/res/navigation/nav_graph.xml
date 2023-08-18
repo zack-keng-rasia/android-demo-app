@@ -9,14 +9,22 @@
         android:id="@+id/mainFragment"
         android:name="com.zack.rewards.sample.demoapp.nav.MainFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_to_javascriptFragment"
+            android:id="@+id/go_to_javascriptFragment"
             app:destination="@id/javascriptFragment" />
+        <action
+            android:id="@+id/go_to_referrerFragment"
+            app:destination="@id/referrerFragment" />
     </fragment>
     <fragment
         android:id="@+id/javascriptFragment"
         android:name="com.zack.rewards.sample.demoapp.javascript.JavascriptFragment"
         android:label="@string/label_javascript"
         tools:layout="@layout/fragment_javascript" />
+    <fragment
+        android:id="@+id/referrerFragment"
+        android:name="com.zack.rewards.sample.demoapp.referrer.ReferrerFragment"
+        android:label="@string/label_referrer"
+        tools:layout="@layout/fragment_referrer" />
 </navigation>

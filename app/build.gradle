@@ -9,7 +9,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.zack.rewards.sample.demoapp"
+        applicationId "com.zack.android.demoapp"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -46,6 +46,9 @@ dependencies {
     //====== Jetpack Navigation ============
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.nav_version"
+
+    //====== InstallReferrer API ===========
+    implementation "com.android.installreferrer:installreferrer:2.2"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

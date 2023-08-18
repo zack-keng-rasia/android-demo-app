@@ -2,8 +2,11 @@
     <string name="app_name">Demo App</string>
 
     <string name="label_javascript">Javascript to Native Code</string>
+    <string name="label_referrer">InstallReferrer API</string>
+    <string name="info">Info</string>
 
     <string-array name="Features">
         <item>Javascript</item>
+        <item>InstallReferrer</item>
     </string-array>
 </resources>

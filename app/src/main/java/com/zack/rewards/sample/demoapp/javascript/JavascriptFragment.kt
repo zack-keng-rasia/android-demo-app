@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import androidx.fragment.app.Fragment
 import com.zack.rewards.sample.demoapp.databinding.FragmentJavascriptBinding
+import com.zack.rewards.sample.demoapp.nav.InfoFragment
 
 /**
  *
@@ -15,16 +15,19 @@ import com.zack.rewards.sample.demoapp.databinding.FragmentJavascriptBinding
  * Created on 2023/08/14
  * Copyright © 2023 Rakuten Asia. All rights reserved.
  */
-class JavascriptFragment : Fragment(), CompoundButton.OnCheckedChangeListener {
+class JavascriptFragment : InfoFragment(), CompoundButton.OnCheckedChangeListener {
     private lateinit var binding: FragmentJavascriptBinding
-
-    override fun onCreateView(
+    override fun createFragmentView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentJavascriptBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun infoIconClicked() {
+        showInfoDialog("This page is to demo the communication between Javascript and Native Code")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

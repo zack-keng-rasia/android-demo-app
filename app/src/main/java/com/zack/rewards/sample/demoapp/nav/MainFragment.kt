@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.ListFragment
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import com.zack.rewards.sample.demoapp.R
 import com.zack.rewards.sample.demoapp.databinding.FragmentMainBinding
-import com.zack.rewards.sample.demoapp.util.showToast
 
 /**
  *
@@ -21,7 +20,10 @@ import com.zack.rewards.sample.demoapp.util.showToast
  */
 class MainFragment : ListFragment() {
     private lateinit var binding: FragmentMainBinding
-    private lateinit var features: Array<String>
+    private val features = listOf(
+        FeatureItem("Javascript", MainFragmentDirections.goToJavascriptFragment()),
+        FeatureItem("InstallReferrer", MainFragmentDirections.goToReferrerFragment())
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,19 +37,22 @@ class MainFragment : ListFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        features = resources.getStringArray(R.array.Features)
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, features)
+        val labels = features.map { it.name }
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, labels)
         listAdapter = adapter
     }
 
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
-        when (val selectedFeature = features[position]) {
-            "Javascript" -> {
-                val directions = MainFragmentDirections.actionToJavascriptFragment()
-                findNavController().navigate(directions)
-            }
+        val selectedFeature = features[position]
+        navigate(selectedFeature.directions)
+    }
 
-            else -> showToast("Feature [$selectedFeature] not implemented")
-        }
+    private fun navigate(directions: NavDirections) {
+        findNavController().navigate(directions)
     }
 }
+
+data class FeatureItem(
+    val name: String,
+    val directions: NavDirections
+)
