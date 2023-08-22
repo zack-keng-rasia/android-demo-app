@@ -110,14 +110,14 @@ class ReferrerFragment : InfoFragment() {
         binding.referrerDetails.adapter = adapter
     }
 
-    private fun getTimeStamp(millisecond: Long): String {
-        if (millisecond == 0L) return "NA"
+    private fun getTimeStamp(seconds: Long): String {
+        if (seconds == 0L) return "NA"
         val calendar = Calendar.getInstance()
-        calendar.timeInMillis = millisecond
+        calendar.timeInMillis = (seconds*1000)
         return try {
             sdf.format(calendar.timeInMillis)
         } catch (e: Exception) {
-            Log.e("InstallReferrerPage", "Format Date exception: $millisecond", e)
+            Log.e("InstallReferrerPage", "Format Date exception: $seconds", e)
             "NA"
         }
     }
