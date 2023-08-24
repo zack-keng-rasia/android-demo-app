@@ -16,6 +16,9 @@
         <action
             android:id="@+id/go_to_referrerFragment"
             app:destination="@id/referrerFragment" />
+        <action
+            android:id="@+id/go_to_shortcutFragment"
+            app:destination="@id/shortcutFragment" />
     </fragment>
     <fragment
         android:id="@+id/javascriptFragment"
@@ -27,4 +30,9 @@
         android:name="com.zack.rewards.sample.demoapp.referrer.ReferrerFragment"
         android:label="@string/label_referrer"
         tools:layout="@layout/fragment_referrer" />
+    <fragment
+        android:id="@+id/shortcutFragment"
+        android:name="com.zack.rewards.sample.demoapp.shortcut.ShortcutFragment"
+        android:label="@string/label_app_shortcut"
+        tools:layout="@layout/fragment_app_shortcut" />
 </navigation>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/shortcut_enter_url"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:hint="@string/shortcut_hint"
+            android:inputType="textUri" />
+
+        <ImageView
+            android:id="@+id/shortcut_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:contentDescription="@string/shortcut_bookmark"
+            android:padding="10dp"
+            android:src="@drawable/outline_bookmark_add_24" />
+
+        <ImageView
+            android:id="@+id/shortcut_add_to_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:contentDescription="@string/shortcut_add"
+            android:padding="10dp"
+            android:src="@drawable/baseline_add_to_home_screen_24" />
+    </LinearLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/shortcut_web_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:progress="5"
+        app:indicatorColor="@android:color/holo_blue_dark" />
+
+    <WebView
+        android:id="@+id/shortcut_web_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

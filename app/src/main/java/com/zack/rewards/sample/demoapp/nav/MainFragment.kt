@@ -22,7 +22,8 @@ class MainFragment : ListFragment() {
     private lateinit var binding: FragmentMainBinding
     private val features = listOf(
         FeatureItem("Javascript", MainFragmentDirections.goToJavascriptFragment()),
-        FeatureItem("InstallReferrer", MainFragmentDirections.goToReferrerFragment())
+        FeatureItem("InstallReferrer", MainFragmentDirections.goToReferrerFragment()),
+        FeatureItem("App Shortcut", MainFragmentDirections.goToShortcutFragment())
     )
 
     override fun onCreateView(

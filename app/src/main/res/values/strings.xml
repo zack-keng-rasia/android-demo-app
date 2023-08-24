@@ -3,7 +3,14 @@
 
     <string name="label_javascript">Javascript to Native Code</string>
     <string name="label_referrer">InstallReferrer API</string>
+    <string name="label_app_shortcut">Demo App Shortcut</string>
     <string name="info">Info</string>
+    <string name="shortcut_bookmark">bookmark page</string>
+    <string name="shortcut_add">Add to home screen</string>
+    <string name="shortcut_hint">https://www.google.com</string>
+
+    <string name="shortcut_short_label">Open browser</string>
+    <string name="shortcut_long_label">Open browser in app</string>
 
     <string-array name="Features">
         <item>Javascript</item>

@@ -1,6 +1,8 @@
 package com.zack.rewards.sample.demoapp.util
 
 import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
@@ -21,4 +23,8 @@ fun Fragment.showLongToast(message: String) {
 
 fun Context.toastMessage(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Context.hideKeyboard(view: View) {
+    (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
 }

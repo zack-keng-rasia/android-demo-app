@@ -1,6 +1,7 @@
 package com.zack.rewards.sample.demoapp.nav
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -11,6 +12,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.zack.rewards.sample.demoapp.R
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        private const val ACTION_OPEN_WEB = "com.zack.android.demo.OPEN_WEB"
+    }
+
     private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +29,17 @@ class MainActivity : AppCompatActivity() {
         val navController = host.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setUpActionBar(navController)
+
+        checkAction(navController, intent.action)
+    }
+
+    private fun checkAction(navController: NavController, action: String?) {
+        action?.let {
+            if (it == ACTION_OPEN_WEB) {
+                Log.d("DemoApp", "Shortcut to open web")
+                navController.navigate(MainFragmentDirections.goToShortcutFragment())
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
