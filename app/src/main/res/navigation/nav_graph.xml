@@ -34,5 +34,11 @@
         android:id="@+id/shortcutFragment"
         android:name="com.zack.rewards.sample.demoapp.shortcut.ShortcutFragment"
         android:label="@string/label_app_shortcut"
-        tools:layout="@layout/fragment_app_shortcut" />
+        tools:layout="@layout/fragment_app_shortcut">
+        <argument
+            android:name="pageUrl"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

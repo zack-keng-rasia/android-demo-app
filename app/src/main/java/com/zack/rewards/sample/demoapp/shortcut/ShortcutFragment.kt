@@ -1,7 +1,9 @@
 package com.zack.rewards.sample.demoapp.shortcut
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,10 +14,16 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView.OnEditorActionListener
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
+import androidx.navigation.fragment.navArgs
+import com.zack.rewards.sample.demoapp.R
 import com.zack.rewards.sample.demoapp.databinding.FragmentAppShortcutBinding
 import com.zack.rewards.sample.demoapp.nav.InfoFragment
+import com.zack.rewards.sample.demoapp.nav.MainActivity
 import com.zack.rewards.sample.demoapp.util.hideKeyboard
-import java.util.logging.Logger
+import com.zack.rewards.sample.demoapp.util.showLongToast
 
 /**
  *
@@ -24,7 +32,13 @@ import java.util.logging.Logger
  * Copyright © 2023 Rakuten Asia. All rights reserved.
  */
 class ShortcutFragment : InfoFragment() {
+    companion object {
+        const val ACTION_OPEN_WEB = "com.zack.android.demo.OPEN_WEB"
+    }
+
     private lateinit var binding: FragmentAppShortcutBinding
+
+    private val args: ShortcutFragmentArgs by navArgs()
 
     override fun createFragmentView(
         inflater: LayoutInflater,
@@ -32,6 +46,7 @@ class ShortcutFragment : InfoFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAppShortcutBinding.inflate(inflater, container, false)
+        setIconStatus(false)
         return binding.root
     }
 
@@ -41,15 +56,16 @@ class ShortcutFragment : InfoFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpWebView()
+        val pageUrl = args.pageUrl
+        setUpWebView(pageUrl)
         setListener()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private fun setUpWebView() {
+    private fun setUpWebView(defaultUrl: String?) {
         with(binding.shortcutWebView) {
             settings.javaScriptEnabled = true
-            webChromeClient = object: WebChromeClient() {
+            webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     super.onProgressChanged(view, newProgress)
                     binding.shortcutWebProgress.progress = newProgress
@@ -60,6 +76,7 @@ class ShortcutFragment : InfoFragment() {
                     super.onPageStarted(view, url, favicon)
                     Log.d("Shortcut", "onPageStarted: $url")
                     binding.shortcutWebProgress.visibility = View.VISIBLE
+                    setIconStatus(false)
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {
@@ -67,29 +84,100 @@ class ShortcutFragment : InfoFragment() {
                     Log.d("Shortcut", "onPageFinished: $url")
                     binding.shortcutWebProgress.visibility = View.GONE
                     binding.shortcutEnterUrl.setText(url)
+                    checkForDynamicShortcut(view?.title ?: "")
+                    setIconStatus(true)
                 }
             }
         }
+
+        if (!defaultUrl.isNullOrEmpty()) {
+            binding.shortcutEnterUrl.setText(defaultUrl)
+            binding.shortcutWebView.loadUrl(defaultUrl)
+        }
+    }
+
+    private fun setIconStatus(enable: Boolean) {
+        binding.shortcutBookmark.isEnabled = enable
+        binding.shortcutAddToHome.isEnabled = enable
     }
 
     private fun setListener() {
         with(binding) {
             shortcutEnterUrl.setOnEditorActionListener(editorActionListener)
-            shortcutBookmark.setOnClickListener {
-                dynamicShortcut()
-            }
             shortcutAddToHome.setOnClickListener {
                 pinnedShortcut()
             }
         }
     }
 
+    private fun checkForDynamicShortcut(title: String) {
+        val shortcutId = "dyna_$title"
+        Log.d("Shortcut", "Check for dynamic shortcut: $shortcutId")
+        val shortcut = ShortcutManagerCompat.getDynamicShortcuts(requireContext()).find {
+            it.id == shortcutId
+        }
+        if (shortcut == null) {
+            Log.d("Shortcut", "Not found! User can add the shortcut")
+            binding.shortcutBookmark.setImageResource(R.drawable.outline_bookmark_add_24)
+            binding.shortcutBookmark.setOnClickListener {
+                dynamicShortcut()
+            }
+        } else {
+            Log.d("Shortcut", "Found! User can remove the shortcut")
+            binding.shortcutBookmark.setImageResource(R.drawable.baseline_bookmark_remove_24)
+            binding.shortcutBookmark.setOnClickListener {
+                removeDynamicShort(shortcutId)
+            }
+        }
+    }
+
+    private fun removeDynamicShort(id: String) {
+        ShortcutManagerCompat.removeDynamicShortcuts(requireContext(), listOf(id))
+        showLongToast("Removed dynamic shortcut")
+        Log.d("Shortcut", "Removed dynamic shortcut: $id")
+        checkForDynamicShortcut(id.replace("dyna_", ""))
+    }
+
+    private fun createShortcutInfo(tag: String): ShortcutInfoCompat {
+        val favicon = binding.shortcutWebView.favicon
+        val icon = if (favicon != null) {
+            IconCompat.createWithBitmap(favicon)
+        } else {
+            IconCompat.createWithResource(requireContext(), R.drawable.twotone_web_24)
+        }
+        val intent = Intent(requireContext(), MainActivity::class.java).apply {
+            action = ACTION_OPEN_WEB
+            data = Uri.parse(binding.shortcutWebView.url)
+        }
+        val title = binding.shortcutWebView.title ?: "UNKNOWN"
+
+        return ShortcutInfoCompat.Builder(requireContext(), tag + "_$title")
+            .setShortLabel(title)
+            .setLongLabel("Open $title")
+            .setIcon(icon)
+            .setIntent(intent)
+            .build()
+    }
+
     private fun pinnedShortcut() {
-        TODO("Not yet implemented")
+        if (ShortcutManagerCompat.isRequestPinShortcutSupported(requireContext())) {
+            val shortcutInfo = createShortcutInfo("pinned")
+
+            Log.d("Shortcut", "Creating pinned shortcut: ${shortcutInfo.id}")
+            ShortcutManagerCompat.requestPinShortcut(requireContext(), shortcutInfo, null)
+        } else {
+            showLongToast("Device not supported for pin shortcut.")
+        }
     }
 
     private fun dynamicShortcut() {
-        TODO("Not yet implemented")
+        val shortcut = createShortcutInfo("dyna")
+
+        Log.d("Shortcut", "Creating dynamic shortcut: ${shortcut.id}")
+        ShortcutManagerCompat.pushDynamicShortcut(requireContext(), shortcut)
+
+        checkForDynamicShortcut(shortcut.shortLabel.toString())
+        showLongToast("Dynamic Shortcut created")
     }
 
     private fun loadUrl(url: String) {
