@@ -171,13 +171,28 @@ class ShortcutFragment : InfoFragment() {
     }
 
     private fun dynamicShortcut() {
-        val shortcut = createShortcutInfo("dyna")
 
-        Log.d("Shortcut", "Creating dynamic shortcut: ${shortcut.id}")
-        ShortcutManagerCompat.pushDynamicShortcut(requireContext(), shortcut)
 
-        checkForDynamicShortcut(shortcut.shortLabel.toString())
-        showLongToast("Dynamic Shortcut created")
+        val max = ShortcutManagerCompat.getMaxShortcutCountPerActivity(requireContext())
+
+
+        val count = ShortcutManagerCompat.getDynamicShortcuts(requireContext()).count()
+
+        Log.d("Shortcut", "Maximum shortcut [$max]")
+        Log.d("Shortcut", "Current dynamic shortcut count [$count]")
+        
+        try {
+            val shortcut = createShortcutInfo("dyna")
+
+            Log.d("Shortcut", "Creating dynamic shortcut: ${shortcut.id}")
+            ShortcutManagerCompat.pushDynamicShortcut(requireContext(), shortcut)
+
+            checkForDynamicShortcut(shortcut.shortLabel.toString())
+            showLongToast("Dynamic Shortcut created")
+        } catch (e: Exception) {
+            showLongToast("Already reached the maximum number of shortcuts!")
+            Log.w("Shortcut", "Exceed maximum count already!", e)
+        }
     }
 
     private fun loadUrl(url: String) {
