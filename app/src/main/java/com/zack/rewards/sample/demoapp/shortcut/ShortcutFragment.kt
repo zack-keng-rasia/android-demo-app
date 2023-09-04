@@ -133,6 +133,7 @@ class ShortcutFragment : InfoFragment() {
 
     private fun removeDynamicShort(id: String) {
         ShortcutManagerCompat.removeDynamicShortcuts(requireContext(), listOf(id))
+        ShortcutManagerCompat.disableShortcuts(requireContext(), listOf(id), "This shortcut is disabled")
         showLongToast("Removed dynamic shortcut")
         Log.d("Shortcut", "Removed dynamic shortcut: $id")
         checkForDynamicShortcut(id.replace("dyna_", ""))
@@ -171,11 +172,7 @@ class ShortcutFragment : InfoFragment() {
     }
 
     private fun dynamicShortcut() {
-
-
         val max = ShortcutManagerCompat.getMaxShortcutCountPerActivity(requireContext())
-
-
         val count = ShortcutManagerCompat.getDynamicShortcuts(requireContext()).count()
 
         Log.d("Shortcut", "Maximum shortcut [$max]")
