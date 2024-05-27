@@ -10,6 +10,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url "https://raw.github.com/zack-keng-rasia/android-simple-sdk/main/maven"
+            allowInsecureProtocol = true
+        }
     }
 }
 rootProject.name = "Demo App"

@@ -27,6 +27,12 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+        <activity android:name="com.zack.rewards.sample.demoapp.mission.MissionSdkActivity" />
+
+        <meta-data
+            android:name="com.rakuten.gap.ads.mission_core.appKey"
+            android:value="anAuY28ucmFrdXRlbi5yZXdhcmQuYW5kcm9pZC1yYWJRNjJfVVFJUmpqY2duNjVwR1NwcmJ3Q1FWRFNSYg=="/>
+
     </application>
 
 </manifest>

@@ -19,6 +19,9 @@
         <action
             android:id="@+id/go_to_shortcutFragment"
             app:destination="@id/shortcutFragment" />
+        <action
+            android:id="@+id/go_to_missionSdkActivity"
+            app:destination="@id/missionSdkActivity" />
     </fragment>
     <fragment
         android:id="@+id/javascriptFragment"
@@ -41,4 +44,9 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+    <activity
+        android:id="@+id/missionSdkActivity"
+        android:name="com.zack.rewards.sample.demoapp.mission.MissionSdkActivity"
+        android:label="MissionSdkActivity"
+        tools:layout="@layout/activity_mission_sdk" />
 </navigation>
