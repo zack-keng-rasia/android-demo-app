@@ -19,6 +19,9 @@
         <action
             android:id="@+id/go_to_shortcutFragment"
             app:destination="@id/shortcutFragment" />
+        <action
+            android:id="@+id/go_to_leakActivity"
+            app:destination="@id/leakActivity" />
     </fragment>
     <fragment
         android:id="@+id/javascriptFragment"
@@ -41,4 +44,8 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+
+    <activity
+        android:id="@+id/leakActivity"
+        android:name="com.zack.rewards.sample.demoapp.leak.MemoryLeakActivity" />
 </navigation>

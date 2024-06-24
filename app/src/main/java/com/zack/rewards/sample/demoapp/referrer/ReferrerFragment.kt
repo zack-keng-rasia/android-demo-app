@@ -47,6 +47,11 @@ class ReferrerFragment : InfoFragment() {
         callReferrerApi()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        referrerClient.endConnection()
+    }
+
     private fun callReferrerApi() {
         referrerClient = InstallReferrerClient.newBuilder(requireContext()).build()
         referrerClient.startConnection(object : InstallReferrerStateListener {
