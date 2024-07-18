@@ -6,11 +6,16 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import shark.Leak
 
-class NetworkBroadcastReceiver: BroadcastReceiver() {
+class NetworkBroadcastReceiver(private val networkListener: NetworkListener? = null): BroadcastReceiver() {
     enum class NetworkStatus {
         CONNECTED,
         DISCONNECTED
+    }
+
+    private fun getListener(): NetworkListener? {
+        return networkListener ?: LeakObject.getListener()
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -24,10 +29,10 @@ class NetworkBroadcastReceiver: BroadcastReceiver() {
             // Perform action based on network connection status
             if (isConnected) {
                 // Network is connected
-                LeakObject.getListener()?.onNetworkChanged(NetworkStatus.CONNECTED)
+                getListener()?.onNetworkChanged(NetworkStatus.CONNECTED)
             } else {
                 // Network is disconnected
-                LeakObject.getListener()?.onNetworkChanged(NetworkStatus.DISCONNECTED)
+                getListener()?.onNetworkChanged(NetworkStatus.DISCONNECTED)
             }
         }
     }
