@@ -1,7 +1,6 @@
-package com.zack.rewards.sample.demoapp.nav
+package com.zack.rewards.sample.demoapp.ai
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,20 +10,20 @@ import androidx.fragment.app.ListFragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.zack.rewards.sample.demoapp.databinding.FragmentMainBinding
+import com.zack.rewards.sample.demoapp.nav.FeatureItem
 
 /**
  *
  * @author zack.keng
- * Created on 2023/08/14
- * Copyright © 2023 Rakuten Asia. All rights reserved.
+ * Created on 2024/10/22
+ * Copyright © 2024 Rakuten Asia. All rights reserved.
  */
-class MainFragment : ListFragment() {
+class GeminiApiFragment : ListFragment() {
     private lateinit var binding: FragmentMainBinding
     private val features = listOf(
-        FeatureItem("Javascript", MainFragmentDirections.goToJavascriptFragment()),
-        FeatureItem("InstallReferrer", MainFragmentDirections.goToReferrerFragment()),
-        FeatureItem("App Shortcut", MainFragmentDirections.goToShortcutFragment()),
-        FeatureItem("Gemini AI", MainFragmentDirections.goToGeminiApiFragment())
+        FeatureItem("Text Generation", GeminiApiFragmentDirections.goToGeminiAiFragment()),
+        FeatureItem("Image Prompting", GeminiApiFragmentDirections.goToGeminiImageFragment()),
+        FeatureItem("Multi-turn Chat", GeminiApiFragmentDirections.goToGeminiChatFragment())
     )
 
     override fun onCreateView(
@@ -32,7 +31,6 @@ class MainFragment : ListFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.d("MainFragment", "onCreateView")
         binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,8 +51,3 @@ class MainFragment : ListFragment() {
         findNavController().navigate(directions)
     }
 }
-
-data class FeatureItem(
-    val name: String,
-    val directions: NavDirections
-)

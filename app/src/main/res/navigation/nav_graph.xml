@@ -19,6 +19,9 @@
         <action
             android:id="@+id/go_to_shortcutFragment"
             app:destination="@id/shortcutFragment" />
+        <action
+            android:id="@+id/go_to_geminiApiFragment"
+            app:destination="@id/geminiApiFragment" />
     </fragment>
     <fragment
         android:id="@+id/javascriptFragment"
@@ -40,5 +43,36 @@
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/geminiAiFragment"
+        android:name="com.zack.rewards.sample.demoapp.ai.GeminiAiFragment"
+        android:label="@string/label_gemini_ai"
+        tools:layout="@layout/fragment_gemini" />
+
+    <fragment
+        android:id="@+id/geminiChatFragment"
+        android:name="com.zack.rewards.sample.demoapp.ai.GeminiChatFragment"
+        android:label="@string/label_gemini_ai"
+        tools:layout="@layout/fragment_gemini_chat" />
+    <fragment
+        android:id="@+id/geminiImageFragment"
+        android:name="com.zack.rewards.sample.demoapp.ai.GeminiImageFragment"
+        android:label="@string/label_gemini_ai"
+        tools:layout="@layout/fragment_gemini" />
+    <fragment
+        android:id="@+id/geminiApiFragment"
+        android:name="com.zack.rewards.sample.demoapp.ai.GeminiApiFragment"
+        android:label="@string/label_gemini_ai"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/go_to_geminiAiFragment"
+            app:destination="@id/geminiAiFragment" />
+        <action
+            android:id="@+id/go_to_geminiChatFragment"
+            app:destination="@id/geminiChatFragment" />
+        <action
+            android:id="@+id/go_to_geminiImageFragment"
+            app:destination="@id/geminiImageFragment" />
     </fragment>
 </navigation>

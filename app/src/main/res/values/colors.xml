@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="rakuten_red">#BF0000</color>
+
+    <color name="red_300">#F06292</color>
+    <color name="red_100">#F8BBD0</color>
 </resources>
