@@ -6,14 +6,14 @@ plugins {
 
 android {
     namespace 'com.zack.rewards.sample.demoapp'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.zack.android.demoapp"
         minSdk 24
-        targetSdk 33
-        versionCode 2
-        versionName "0.1.1"
+        targetSdk 34
+        versionCode 3
+        versionName "0.1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
