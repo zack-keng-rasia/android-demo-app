@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:text="Show Lock Screen"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_show_lock_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp">
+        <RadioButton
+            android:id="@+id/radio_screen_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Screen Off"/>
+
+        <RadioButton
+            android:id="@+id/radio_screen_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Screen On"/>
+    </RadioGroup>
+
+</LinearLayout>

@@ -4,6 +4,7 @@
     <string name="label_javascript">Javascript to Native Code</string>
     <string name="label_referrer">InstallReferrer API</string>
     <string name="label_app_shortcut">Demo App Shortcut</string>
+    <string name="label_config_lock_screen">Config Lock Screen</string>
     <string name="info">Info</string>
     <string name="shortcut_bookmark">bookmark page</string>
     <string name="shortcut_add">Add to home screen</string>

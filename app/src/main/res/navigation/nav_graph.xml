@@ -19,6 +19,9 @@
         <action
             android:id="@+id/go_to_shortcutFragment"
             app:destination="@id/shortcutFragment" />
+        <action
+            android:id="@+id/go_to_lockScreenFragment"
+            app:destination="@id/configLockScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/javascriptFragment"
@@ -41,4 +44,9 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/configLockScreenFragment"
+        android:name="com.zack.rewards.sample.demoapp.lock.ConfigLockScreenFragment"
+        android:label="@string/label_config_lock_screen"
+        tools:layout="@layout/fragment_lockscreen_config" />
 </navigation>

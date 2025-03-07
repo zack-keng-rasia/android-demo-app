@@ -23,7 +23,8 @@ class MainFragment : ListFragment() {
     private val features = listOf(
         FeatureItem("Javascript", MainFragmentDirections.goToJavascriptFragment()),
         FeatureItem("InstallReferrer", MainFragmentDirections.goToReferrerFragment()),
-        FeatureItem("App Shortcut", MainFragmentDirections.goToShortcutFragment())
+        FeatureItem("App Shortcut", MainFragmentDirections.goToShortcutFragment()),
+        FeatureItem("Lock Screen Config", MainFragmentDirections.goToLockScreenFragment())
     )
 
     override fun onCreateView(
