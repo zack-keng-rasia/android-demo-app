@@ -5,5 +5,17 @@
         <item name="colorPrimary">@color/rakuten_red</item>
     </style>
 
+    <style name="Theme.DemoApp.Splash" parent="Theme.SplashScreen.IconBackground">
+        <!-- Splash Screen Background Color -->
+        <item name="windowSplashScreenBackground">@color/black</item>
+
+        <!-- Splash Animated Icon -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/ic_launcher_background</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.DemoApp</item>
+    </style>
+
     <style name="Theme.DemoApp" parent="Base.Theme.DemoApp" />
 </resources>
