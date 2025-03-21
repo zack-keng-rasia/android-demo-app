@@ -19,6 +19,9 @@
         <action
             android:id="@+id/go_to_shortcutFragment"
             app:destination="@id/shortcutFragment" />
+        <action
+            android:id="@+id/go_to_lazyListFragment"
+            app:destination="@id/lazyListFragment"/>
     </fragment>
     <fragment
         android:id="@+id/javascriptFragment"
@@ -41,4 +44,8 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/lazyListFragment"
+        android:name="com.zack.rewards.sample.demoapp.compose.LazyListFragment"
+        android:label="@string/label_lazy_list"/>
 </navigation>
