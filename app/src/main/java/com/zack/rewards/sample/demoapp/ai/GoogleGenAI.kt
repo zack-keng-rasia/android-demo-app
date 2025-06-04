@@ -1,11 +1,12 @@
 package com.zack.rewards.sample.demoapp.ai
 
-import com.google.ai.client.generativeai.GenerativeModel
-import com.google.ai.client.generativeai.type.BlockThreshold
-import com.google.ai.client.generativeai.type.HarmCategory
-import com.google.ai.client.generativeai.type.SafetySetting
-import com.google.ai.client.generativeai.type.generationConfig
-import com.zack.rewards.sample.demoapp.BuildConfig
+import com.google.firebase.ai.FirebaseAI
+import com.google.firebase.ai.GenerativeModel
+import com.google.firebase.ai.type.GenerativeBackend
+import com.google.firebase.ai.type.HarmBlockThreshold
+import com.google.firebase.ai.type.HarmCategory
+import com.google.firebase.ai.type.SafetySetting
+import com.google.firebase.ai.type.generationConfig
 
 /**
  *
@@ -22,21 +23,27 @@ object GoogleGenAI {
         providedTopP: Float,
         providedMaxT: Int
     ): GenerativeModel {
-        return GenerativeModel(
-            modelName = geminiModel.modelName,
-            apiKey = BuildConfig.googleAiApiKey,
-            generationConfig = generationConfig {
-                temperature = providedTemp
-                topK = providedTopK
-                topP = providedTopP
-                maxOutputTokens = providedMaxT
-            },
-            safetySettings = listOf(
-                SafetySetting(HarmCategory.HARASSMENT, BlockThreshold.MEDIUM_AND_ABOVE),
-                SafetySetting(HarmCategory.HATE_SPEECH, BlockThreshold.MEDIUM_AND_ABOVE),
-                SafetySetting(HarmCategory.SEXUALLY_EXPLICIT, BlockThreshold.MEDIUM_AND_ABOVE),
-                SafetySetting(HarmCategory.DANGEROUS_CONTENT, BlockThreshold.MEDIUM_AND_ABOVE),
+        return FirebaseAI.getInstance(backend = GenerativeBackend.googleAI())
+            .generativeModel(
+                modelName = geminiModel.modelName,
+                generationConfig = generationConfig {
+                    temperature = providedTemp
+                    topK = providedTopK
+                    topP = providedTopP
+                    maxOutputTokens = providedMaxT
+                },
+                safetySettings = listOf(
+                    SafetySetting(HarmCategory.HARASSMENT, HarmBlockThreshold.MEDIUM_AND_ABOVE),
+                    SafetySetting(HarmCategory.HATE_SPEECH, HarmBlockThreshold.MEDIUM_AND_ABOVE),
+                    SafetySetting(
+                        HarmCategory.SEXUALLY_EXPLICIT,
+                        HarmBlockThreshold.MEDIUM_AND_ABOVE
+                    ),
+                    SafetySetting(
+                        HarmCategory.DANGEROUS_CONTENT,
+                        HarmBlockThreshold.MEDIUM_AND_ABOVE
+                    )
+                )
             )
-        )
     }
 }

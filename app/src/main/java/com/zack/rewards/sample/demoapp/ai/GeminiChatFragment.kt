@@ -14,8 +14,8 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
-import com.google.ai.client.generativeai.Chat
-import com.google.ai.client.generativeai.type.content
+import com.google.firebase.ai.Chat
+import com.google.firebase.ai.type.content
 import com.zack.rewards.sample.demoapp.databinding.FragmentGeminiChatBinding
 import com.zack.rewards.sample.demoapp.nav.InfoFragment
 import kotlinx.coroutines.launch
@@ -51,7 +51,7 @@ class GeminiChatFragment : InfoFragment() {
         )
         adapter = GeminiChatAdapter(chatList)
         geminiChat =
-            GoogleGenAI.newModel(GeminiModel.GEMINI_1_5_FLASH, 0.2f, 32, 1f, 4096).startChat(
+            GoogleGenAI.newModel(GeminiModel.GEMINI_2_0_FLASH, 0.2f, 32, 1f, 4096).startChat(
                 history = chatList.map { content(it.role.role) { text(it.message) } },
             )
         binding.chatMessageList.adapter = adapter

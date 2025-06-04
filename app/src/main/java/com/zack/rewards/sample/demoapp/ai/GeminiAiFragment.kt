@@ -15,8 +15,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
-import com.google.ai.client.generativeai.GenerativeModel
-import com.google.ai.client.generativeai.type.content
+import com.google.firebase.ai.GenerativeModel
+import com.google.firebase.ai.type.content
 import com.zack.rewards.sample.demoapp.databinding.FragmentGeminiBinding
 import com.zack.rewards.sample.demoapp.nav.InfoFragment
 import com.zack.rewards.sample.demoapp.util.hideKeyboard
@@ -45,7 +45,7 @@ class GeminiAiFragment : InfoFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        geminiModel = GoogleGenAI.newModel(GeminiModel.GEMINI_1_0_PRO, 0.2f, 32, 1f, 4096)
+        geminiModel = GoogleGenAI.newModel(GeminiModel.GEMINI_2_0_FLASH, 0.2f, 32, 1f, 4096)
         pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
                 Log.d("GeminiAI", "URI - $uri")

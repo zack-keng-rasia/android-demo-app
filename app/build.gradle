@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -58,11 +59,20 @@ dependencies {
     implementation 'androidx.core:core-google-shortcuts:1.0.0'
 
     //====== Google AI Client SDK ========
-    implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
-    // Required to use `ListenableFuture` from Guava Android for one-shot generation
-    implementation("com.google.guava:guava:31.0.1-android")
-    // Required to use `Publisher` from Reactive Streams for streaming operations
-    implementation("org.reactivestreams:reactive-streams:1.0.4")
+//    implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
+//    // Required to use `ListenableFuture` from Guava Android for one-shot generation
+//    implementation("com.google.guava:guava:31.0.1-android")
+//    // Required to use `Publisher` from Reactive Streams for streaming operations
+//    implementation("org.reactivestreams:reactive-streams:1.0.4")
+
+    //======= Firebase Gemini Developer API ========
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:33.14.0"))
+
+    // Add the dependency for the Firebase AI Logic library When using the BoM,
+    // you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-ai")
+    implementation("com.google.firebase:firebase-analytics")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
