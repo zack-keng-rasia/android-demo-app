@@ -61,6 +61,11 @@
         android:label="@string/label_gemini_ai"
         tools:layout="@layout/fragment_gemini" />
     <fragment
+        android:id="@+id/imagenFragment"
+        android:name="com.zack.rewards.sample.demoapp.ai.ImagenFragment"
+        android:label="@string/label_imagen"
+        tools:layout="@layout/fragment_imagen" />
+    <fragment
         android:id="@+id/geminiApiFragment"
         android:name="com.zack.rewards.sample.demoapp.ai.GeminiApiFragment"
         android:label="@string/label_gemini_ai"
@@ -74,5 +79,8 @@
         <action
             android:id="@+id/go_to_geminiImageFragment"
             app:destination="@id/geminiImageFragment" />
+        <action
+            android:id="@+id/go_to_imagenFragment"
+            app:destination="@id/imagenFragment" />
     </fragment>
 </navigation>

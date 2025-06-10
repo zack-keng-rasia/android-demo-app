@@ -23,7 +23,8 @@ class GeminiApiFragment : ListFragment() {
     private val features = listOf(
         FeatureItem("Text Generation", GeminiApiFragmentDirections.goToGeminiAiFragment()),
         FeatureItem("Image Prompting", GeminiApiFragmentDirections.goToGeminiImageFragment()),
-        FeatureItem("Multi-turn Chat", GeminiApiFragmentDirections.goToGeminiChatFragment())
+        FeatureItem("Multi-turn Chat", GeminiApiFragmentDirections.goToGeminiChatFragment()),
+        FeatureItem("Image Generation", GeminiApiFragmentDirections.goToImagenFragment())
     )
 
     override fun onCreateView(

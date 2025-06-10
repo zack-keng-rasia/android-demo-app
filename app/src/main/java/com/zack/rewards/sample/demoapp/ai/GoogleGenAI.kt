@@ -2,9 +2,11 @@ package com.zack.rewards.sample.demoapp.ai
 
 import com.google.firebase.ai.FirebaseAI
 import com.google.firebase.ai.GenerativeModel
+import com.google.firebase.ai.ImagenModel
 import com.google.firebase.ai.type.GenerativeBackend
 import com.google.firebase.ai.type.HarmBlockThreshold
 import com.google.firebase.ai.type.HarmCategory
+import com.google.firebase.ai.type.PublicPreviewAPI
 import com.google.firebase.ai.type.SafetySetting
 import com.google.firebase.ai.type.generationConfig
 
@@ -14,7 +16,13 @@ import com.google.firebase.ai.type.generationConfig
  * Created on 2024/10/17
  * Copyright © 2024 Rakuten Asia. All rights reserved.
  */
+@OptIn(PublicPreviewAPI::class)
 object GoogleGenAI {
+
+    fun imagenModel(): ImagenModel {
+        return FirebaseAI.getInstance(backend = GenerativeBackend.googleAI())
+            .imagenModel(modelName = GeminiModel.IMAGEN_3_0.modelName)
+    }
 
     fun newModel(
         geminiModel: GeminiModel,
