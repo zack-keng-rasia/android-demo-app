@@ -71,11 +71,21 @@ class ImagenFragment : InfoFragment() {
 
     private fun generateImage(prompt: String) {
         lifecycleScope.launch {
-            val imageResponse = imagenModel.generateImages(prompt)
-            val image = imageResponse.images.first()
-
-            val bitmapImage = image.asBitmap()
-            binding.generativeImage.setImageBitmap(bitmapImage)
+            val result = runCatching {
+                val imageResponse = imagenModel.generateImages(prompt)
+                val image = imageResponse.images.first()
+                image.asBitmap()
+            }
+            if (result.isSuccess) {
+                val bitmapImage = result.getOrNull()
+                if (bitmapImage != null) {
+                    binding.generativeImage.setImageBitmap(bitmapImage)
+                } else {
+                    binding.generativeImage.setImageResource(android.R.color.transparent)
+                }
+            } else {
+                showInfoDialog("Failed to generate image: ${result.exceptionOrNull()?.message ?: "Unknown error"}", "Image Generation Failed")
+            }
             imageGenerated()
         }
     }
